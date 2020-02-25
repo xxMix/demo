@@ -1,0 +1,116 @@
+<html style="font-size: 192px;">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<title>登记成功</title>
+	<script src="./index_files/mui.js"></script>
+	<link href="./index_files/mui.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./index_files/success.css">
+	<script src="./index_files/jquery.slim.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		mui.init();
+		mui('body').on('tap', 'a', function () {
+			window.top.location.href = this.href;
+		});
+	</script>
+	<script>
+		window.onload = function () {
+			getRem(750, 100);
+			window.onresize = function () {
+				getRem(750, 100)
+			};
+			function getRem(pwidth, prem) {
+				var html = document.getElementsByTagName("html")[0];
+				var oWidth = document.body.clientWidth || document.documentElement.clientWidth;
+				html.style.fontSize = oWidth / pwidth * prem + "px";
+			}
+			function dateFormat(fmt, date) {
+				let ret;
+				const opt = {
+					"Y+": date.getFullYear().toString(),        // 年
+					"m+": (date.getMonth() + 1).toString(),     // 月
+					"d+": date.getDate().toString(),            // 日
+					"H+": date.getHours().toString(),           // 时
+					"M+": date.getMinutes().toString(),         // 分
+					"S+": date.getSeconds().toString()          // 秒
+					// 有其他格式化字符需求可以继续添加，必须转化成字符串
+				};
+				for (let k in opt) {
+					ret = new RegExp("(" + k + ")").exec(fmt);
+					if (ret) {
+						fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+					};
+				};
+				return fmt;
+			}
+			function getQueryVariable(variable) {
+				var query = window.location.search.substring(1);
+				var vars = query.split("&");
+				for (var i = 0; i < vars.length; i++) {
+					var pair = vars[i].split("=");
+					if (pair[0] == variable) { return pair[1]; }
+				}
+				return (false);
+			}
+			var name = getQueryVariable('name');
+			name = decodeURIComponent(name);
+			var house = getQueryVariable('house');
+			var nameElement = document.getElementsByClassName("name")[0];
+			var houseElement = document.getElementsByClassName("house")[0];
+			nameElement.innerHTML='姓名：'+name;
+			houseElement.innerHTML='房号：'+house;
+
+			var curDate = new Date();
+			var currentTime = dateFormat("YYYY-mm-dd HH:MM:SS", curDate);
+			var timeElement = document.getElementsByClassName("curTime")[0];
+			timeElement.innerHTML = '时间：' + currentTime;
+		}
+	</script>
+	<script type="text/javascript">
+
+	</script>
+
+	<style type="text/css">
+		.form-view {
+			width: 6.9rem;
+			height: 7rem;
+			background: rgba(255, 255, 255, 1);
+			box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+			opacity: 1;
+			border-radius: .5rem;
+			padding-right: .5rem;
+			padding-left: .5rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="view-body">
+		<div class="title-bg">
+		</div>
+		<div class="form-view">
+			<div class="view-logo">
+				<img src="./index_files/logo.png">
+			</div>
+			<div class="icon-view">
+				<img src="./index_files/success.png">
+				<div>登记成功</div>
+			</div>
+			<div class="view-details">
+				<div>详细信息</div>
+				<div class="name"></div>
+				<div class="house"></div>
+				<div class="curTime"></div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+</body>
+<script src="./index_files/special.js"></script>
+
+</html>
